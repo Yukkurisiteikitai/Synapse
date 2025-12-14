@@ -1,0 +1,16 @@
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.history
+.venv
+.env
+.env.local
+node_modules
+node_modules/
+vite.config.ts
+Dockerfile
+docker-compose.yml
+.dockerignore

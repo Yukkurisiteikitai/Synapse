@@ -1,0 +1,15 @@
+__pycache__/
+*.py[oc]
+build/
+wheels/
+*.egg-info
+.venv
+.history
+.env
+.git
+.gitignore
+*.md
+node_modules
+npm-debug.log*
+**/dist
+frontend/.vite

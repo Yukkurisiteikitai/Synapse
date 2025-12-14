@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # chat_browser
 
 # setup関係
@@ -20,3 +21,8 @@ npm install
 npm run dev
 ```
 # Synapse
+=======
+npm install
+
+npm run dev
+>>>>>>> c7bc536 (aiueo)

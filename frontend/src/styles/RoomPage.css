@@ -1,0 +1,326 @@
+.room-page {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.room-loading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5em;
+}
+
+.cursor-area {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: crosshair;
+}
+
+.message-link {
+    color: #4ECDC4;
+    text-decoration: underline;
+    word-break: break-all;
+    cursor: pointer;
+}
+
+.message-link:hover {
+    color: #45B7D1;
+    text-decoration: underline;
+}
+
+.message-link:visited {
+    color: #3BA89F;
+}
+
+.cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    pointer-events: none;
+    transition: all 0.1s ease;
+    z-index: 1000;
+}
+
+.cursor::after {
+    content: attr(data-user);
+    position: absolute;
+    left: 25px;
+    top: -5px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.chat-container {
+    width: 380px;
+    flex-shrink: 0;
+    border-left: 1px solid #dfe1e5;
+    background: linear-gradient(45deg, #511177, #ae6cd2, #de6583, #ae2048);
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.28s ease, opacity 0.28s ease;
+    position: relative;
+}
+
+.chat-container.collapsed {
+    width: 28px;
+    min-width: 28px;
+    opacity: 0.85;
+    border-left: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.35);
+    background: linear-gradient(180deg, rgba(118, 75, 162, 0.85), rgba(81, 17, 119, 0.9));
+}
+
+.chat-container.collapsed:hover {
+    opacity: 1;
+}
+
+.chat-container.collapsed .chat-header,
+.chat-container.collapsed .messages,
+.chat-container.collapsed .input-container {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.chat-collapsed-toggle {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 6px;
+    width: 18px;
+    height: 20px;
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-collapsed-toggle i {
+    font-size: 16px;
+}
+
+.chat-container.collapsed .chat-collapsed-toggle {
+    display: flex;
+}
+
+.chat-header {
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.chat-header-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+}
+
+.chat-room-title {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.online-count {
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 4px 8px;
+    border-radius: 999px;
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.exit-button {
+    border: none;
+    background: rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.exit-button:hover {
+    background: rgba(0, 0, 0, 0.35);
+    transform: translateY(-1px);
+}
+
+.exit-button:active {
+    transform: translateY(0);
+}
+
+.collapse-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 6px 8px;
+    margin-left: auto;
+    font-size: 16px;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.collapse-button:hover {
+    transform: scale(1.08);
+}
+
+.collapse-button:active {
+    transform: scale(0.95);
+}
+
+.messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message {
+    background: #f0f0f0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    max-width: 80%;
+    word-wrap: break-word;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message.own {
+    background: linear-gradient(135deg, #97a8f5 0%, #b186dd 100%);
+    color: white;
+    align-self: flex-end;
+}
+
+.message-user {
+    font-weight: bold;
+    margin-bottom: 4px;
+    font-size: 12px;
+    color: #000000;
+    opacity: 0.8;
+}
+
+.message-text {
+    font-size: 14px;
+    color: #000000;
+}
+
+.input-container {
+    padding: 16px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    gap: 8px;
+}
+
+.message-input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.message-input:focus {
+    border-color: #667eea;
+}
+
+.send-button {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.send-button:hover {
+    transform: scale(1.05);
+}
+
+.send-button:active {
+    transform: scale(0.95);
+}
+
+.leave-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #667eea;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+    z-index: 2000;
+}
+
+.leave-button:hover {
+    transform: scale(1.05);
+}
+
+.leave-button:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+    .chat-container {
+        width: calc(100% - 40px);
+        max-width: 350px;
+    }
+}
